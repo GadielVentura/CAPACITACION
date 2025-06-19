@@ -19,7 +19,7 @@ class UtilTest {
         Assertions.assertEquals(result, Util.addition(num1,num2));
     }
 
-    @DisplayName("Test de suma satisfactorio, error de formtato")
+    @DisplayName("Test de suma satisfactorio, error de formato")
     @ParameterizedTest
     @CsvSource(value = {"A,2","e,3","2,H"})
     void additionTest2(String num1,String num2){
@@ -34,4 +34,25 @@ class UtilTest {
         Assertions.assertThrows(RuntimeException.class,()->Util.addition(num1,num2));
     }
 
+    @DisplayName("escenario satisfactorio resta")
+    @ParameterizedTest
+    @CsvSource(value={"5,2,3","20,10,10","55,32,23"})
+    void restaTest1(String num1,String num2, Double resultado){
+        Assertions.assertEquals(resultado,Util.subtraction(num1,num2));
+    }
+
+    @DisplayName("error de formato, resta")
+    @ParameterizedTest
+    @CsvSource(value = {"E,5","8,H"})
+    void  restaTest2(String num1,String num2){
+        Assertions.assertThrows(NumberFormatException.class,()->Util.subtraction(num1,num2));
+
+    }
+
+    @DisplayName("error general, resta")
+    @ParameterizedTest
+    @CsvSource(value = {"null,null",","})
+    void restaTest3(String num1,String num2){
+        Assertions.assertThrows(RuntimeException.class,()->Util.subtraction(num1,num2));
+    }
 }
